@@ -17,6 +17,7 @@
 #include <yarp/os/Semaphore.h>
 #include <yarp/os/Time.h>
 #include <yarp/dev/PolyDriver.h>
+#include <yarp/dev/IAxisInfo.h>
 
 #include <vector>
 #include <string>
@@ -89,9 +90,9 @@ public:
     virtual bool updateVirtualAnalogSensorMeasure(int ch, double &measure);
 
     /** IAxisInfo methods (documented in IVirtualAnalogSensor class) */
-    virtual bool getAxisName(int axis, std::string& name);
-    virtual bool getJointType(int axis, yarp::dev::JointTypeEnum& type);
-    virtual bool getAxes(int* ax);
+    virtual yarp::dev::ReturnValue  getAxisName(int axis, std::string& name);
+    virtual yarp::dev::ReturnValue  getJointType(int axis, yarp::dev::JointTypeEnum& type);
+    virtual yarp::dev::ReturnValue  getAxes(int* ax);
 };
 
 }

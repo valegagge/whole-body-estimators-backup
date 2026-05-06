@@ -28,9 +28,9 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BIND
                           DEPENDS ENABLE_RPATH
                           USE_LINK_PATH)
 
-set(YARP_REQUIRED_VERSION 3.0.1)
+set(YARP_REQUIRED_VERSION 4.0.0)
 
-find_package(YARP ${YARP_REQUIRED_VERSION} REQUIRED COMPONENTS robotinterface idl_tools eigen os sig)
+find_package(YARP REQUIRED COMPONENTS robotinterface idl_tools eigen os sig)
 find_package(Eigen3 REQUIRED)
 find_package(iDynTree 12.2.0 REQUIRED)
 find_package(ICUB REQUIRED)
