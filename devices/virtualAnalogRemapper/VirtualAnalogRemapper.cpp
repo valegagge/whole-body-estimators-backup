@@ -250,6 +250,7 @@ bool VirtualAnalogRemapper::updateVirtualAnalogSensorMeasure(int ch, double& mea
     if( ch < 0 || ch >= this->getVirtualAnalogSensorChannels() )
     {
         yError() << "VirtualAnalogRemapper: updateMeasure failed : requested channel " << ch << " while the client is configured with " << this->getVirtualAnalogSensorChannels() << " channels";
+        return yarp::dev::ReturnValue_error_generic;
     }
 
     // In this case we need to use the single axis method
@@ -263,7 +264,7 @@ bool VirtualAnalogRemapper::updateVirtualAnalogSensorMeasure(int ch, double& mea
     }
     else
     {
-        ret = false;
+        ret = yarp::dev::ReturnValue_error_generic;
     }
     return ret;
 }
@@ -296,62 +297,62 @@ yarp::dev::VAS_status VirtualAnalogRemapper::getVirtualAnalogSensorStatus(int ch
     return status;
 }
 
-bool VirtualAnalogRemapper::getAxisName(int axis, std::string& name)
+yarp::dev::ReturnValue VirtualAnalogRemapper::getAxisName(int axis, std::string& name)
 {
     if( axis < 0 || axis >= this->getVirtualAnalogSensorChannels() )
     {
         yError() << "VirtualAnalogRemapper: getAxisName failed : requested axis " << axis << " while the remapper is configured with " << this->getVirtualAnalogSensorChannels() << " channels";
-        return false;
+        return yarp::dev::ReturnValue_error_generic;
     }
 
     // In this case we need to use the single axis method
     IAxisInfo * dev = this->remappedAxes[axis].devInfo;
     int localAxis = this->remappedAxes[axis].localAxis;
 
-    bool ret;
+    yarp::dev::ReturnValue ret;
     if( dev )
     {
         ret = dev->getAxisName(localAxis,name);
     }
     else
     {
-        ret = false;
+        ret = yarp::dev::ReturnValue_error_generic;
     }
     return ret;
 }
 
-bool VirtualAnalogRemapper::getJointType(int axis, JointTypeEnum& type)
+yarp::dev::ReturnValue VirtualAnalogRemapper::getJointType(int axis, JointTypeEnum& type)
 {
     if( axis < 0 || axis >= this->getVirtualAnalogSensorChannels() )
     {
         yError() << "VirtualAnalogRemapper: getJointType failed : requested axis " << axis << " while the remapper is configured with " << this->getVirtualAnalogSensorChannels() << " channels";
-        return false;
+        return yarp::dev::ReturnValue_error_generic;
     }
 
     // In this case we need to use the single axis method
     IAxisInfo * dev = this->remappedAxes[axis].devInfo;
     int localAxis = this->remappedAxes[axis].localAxis;
 
-    bool ret;
+    yarp::dev::ReturnValue ret;
     if( dev )
     {
         ret = dev->getJointType(localAxis,type);
     }
     else
     {
-        ret = false;
+        ret = yarp::dev::ReturnValue_error_generic;
     }
     return ret;
 }
 
-bool VirtualAnalogRemapper::getAxes(int* ax)
+yarp::dev::ReturnValue VirtualAnalogRemapper::getAxes(int* ax)
 {
     if( !ax )
     {
         yError() << "VirtualAnalogRemapper: getAxes failed : invalid argument passed";
-        return false;
+        return yarp::dev::ReturnValue_error_generic;
     }
 
     *ax = this->m_axesNames.size();
-    return true;
+    return yarp::dev::ReturnValue_ok;
 }

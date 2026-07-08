@@ -78,11 +78,11 @@ bool VirtualAnalogClient::open(Searchable& config)
             std::string type = AxisTypeBot->get(jnt).asString();
             if (type == "revolute")
             {
-                m_axisType[jnt] = VOCAB_JOINTTYPE_REVOLUTE;
+                m_axisType[jnt] = yarp::dev::JointTypeEnum::VOCAB_JOINTTYPE_REVOLUTE;
             }
             else if (type == "prismatic")
             {
-                m_axisType[jnt] = VOCAB_JOINTTYPE_UNKNOWN;
+                m_axisType[jnt] = yarp::dev::JointTypeEnum::VOCAB_JOINTTYPE_UNKNOWN;
             }
             else
             {
@@ -95,7 +95,7 @@ bool VirtualAnalogClient::open(Searchable& config)
     {
         for(size_t jnt=0; jnt < m_axisType.size(); jnt++)
         {
-            m_axisType[jnt] = VOCAB_JOINTTYPE_REVOLUTE;
+            m_axisType[jnt] = yarp::dev::JointTypeEnum::VOCAB_JOINTTYPE_REVOLUTE;
         }
     }
 

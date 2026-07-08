@@ -2656,12 +2656,12 @@ void WholeBodyDynamicsDevice::publishGravityCompensation()
             int ctrl_mode=0;
             yarp::dev::InteractionModeEnum int_mode;
             remappedControlBoardInterfaces.ctrlmode->getControlMode(dof,&ctrl_mode);
-            remappedControlBoardInterfaces.intmode->getInteractionMode(dof,&int_mode);
+            remappedControlBoardInterfaces.intmode->getInteractionMode(dof,int_mode);
 
             switch(ctrl_mode)
             {
-                case VOCAB_CM_POSITION:
-                case VOCAB_CM_POSITION_DIRECT:
+                case yarp::dev::ControlModeEnum::VOCAB_CM_POSITION:
+                case yarp::dev::ControlModeEnum::VOCAB_CM_POSITION_DIRECT:
                 case VOCAB_CM_MIXED:
                 case VOCAB_CM_VELOCITY:
                      if (int_mode == VOCAB_IM_COMPLIANT)
