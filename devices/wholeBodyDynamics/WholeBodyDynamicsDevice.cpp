@@ -2653,18 +2653,18 @@ void WholeBodyDynamicsDevice::publishGravityCompensation()
         {
             size_t dof = m_gravityCompesationJoints[ii];
 
-            int ctrl_mode=0;
+            yarp::dev::ControlModeEnum ctrl_mode= yarp::dev::ControlModeEnum::VOCAB_CM_UNKNOWN;
             yarp::dev::InteractionModeEnum int_mode;
-            remappedControlBoardInterfaces.ctrlmode->getControlMode(dof,&ctrl_mode);
+            remappedControlBoardInterfaces.ctrlmode->getControlMode(dof,ctrl_mode);
             remappedControlBoardInterfaces.intmode->getInteractionMode(dof,int_mode);
 
             switch(ctrl_mode)
             {
                 case yarp::dev::ControlModeEnum::VOCAB_CM_POSITION:
                 case yarp::dev::ControlModeEnum::VOCAB_CM_POSITION_DIRECT:
-                case VOCAB_CM_MIXED:
-                case VOCAB_CM_VELOCITY:
-                     if (int_mode == VOCAB_IM_COMPLIANT)
+                case yarp::dev::ControlModeEnum::VOCAB_CM_MIXED:
+                case yarp::dev::ControlModeEnum::VOCAB_CM_VELOCITY:
+                     if (int_mode == yarp::dev::InteractionModeEnum::VOCAB_IM_COMPLIANT)
                      {
                          remappedControlBoardInterfaces.impctrl->setImpedanceOffset((int)dof,this->m_gravityCompensationTorques(dof));
                      }
